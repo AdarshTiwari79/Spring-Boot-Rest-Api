@@ -11,8 +11,13 @@ import com.springboot.restapi.restapi.entities.Book;
 @Service
 public class RestService {
 
-  static final List<Book> books = new ArrayList<>();
+  private static List<Book> books = new ArrayList<>();
+
   static {
+    initializeBook();
+  }
+
+  private static void initializeBook() {
     books.add(new Book(1, "Learn java", "java", "Ganesh"));
     books.add(new Book(2, "Spring Boot", "Spring", "Adarsh"));
     books.add(new Book(3, "JSTL", "jsp", "Saurav"));
@@ -34,7 +39,7 @@ public class RestService {
   }
 
   public void deleteBook(int bId) {
-    books.stream().filter(book -> book.getId() != bId).collect(Collectors.toList());
+    books = books.stream().filter(book -> book.getId() != bId).collect(Collectors.toList());
   }
 
 }
