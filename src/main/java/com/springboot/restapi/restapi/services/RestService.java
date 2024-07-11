@@ -42,4 +42,15 @@ public class RestService {
     books = books.stream().filter(book -> book.getId() != bId).collect(Collectors.toList());
   }
 
+  public Book updateBook(int bId, Book book) {
+    books = books.stream().map(e -> {
+      if (e.getId() == bId) {
+        e.setBook_author(book.getBook_author());
+        e.setBook_name(book.getBook_name());
+        e.setBook_title(book.getBook_title());
+      }
+      return e;
+    }).collect(Collectors.toList());
+    return book;
+  }
 }
