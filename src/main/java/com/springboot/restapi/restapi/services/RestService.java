@@ -29,7 +29,12 @@ public class RestService {
 
   public Book getBookById(int id) {
 
-    Book bookById = books.stream().filter(book -> book.getId() == id).findFirst().get();
+    Book bookById = null;
+    try {
+      bookById = books.stream().filter(book -> book.getId() == id).findFirst().get();
+    } catch (Exception e) {
+      System.out.println(e);
+    }
     return bookById;
   }
 
@@ -40,6 +45,7 @@ public class RestService {
 
   public void deleteBook(int bId) {
     books = books.stream().filter(book -> book.getId() != bId).collect(Collectors.toList());
+    // books.removeIf(book -> book.getId() == bId);
   }
 
   public Book updateBook(int bId, Book book) {
