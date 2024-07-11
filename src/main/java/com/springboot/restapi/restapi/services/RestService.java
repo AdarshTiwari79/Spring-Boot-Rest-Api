@@ -27,4 +27,10 @@ public class RestService {
     return bookById;
   }
 
+  public Book addBooks(Book book)
+  {
+    books.add(book);
+    return book;
+  }
+
 }
