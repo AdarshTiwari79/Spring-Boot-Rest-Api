@@ -1,7 +1,6 @@
 package com.springboot.restapi.restapi.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +28,7 @@ public class MainRestController {
     if (books.size() <= 0) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-    return ResponseEntity.of(Optional.of(books));
+    return ResponseEntity.status(HttpStatus.CREATED).body(books);
   }
 
   @GetMapping("/book/{id}")
@@ -43,11 +42,11 @@ public class MainRestController {
   }
 
   @PostMapping("/book")
-  public ResponseEntity<Book> addBook(@RequestBody Book b) {
-    Book book;
+  public ResponseEntity<Void> addBook(@RequestBody Book b) {
+
     try {
-      book = this.restService.addBooks(b);
-      return ResponseEntity.status(HttpStatus.CREATED).body(book);
+      this.restService.addBooks(b);
+      return ResponseEntity.status(HttpStatus.CREATED).build();
     } catch (Exception e) {
       System.out.println(e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -66,12 +65,11 @@ public class MainRestController {
   }
 
   @PutMapping("book/{id}")
-  public ResponseEntity<Book> updateBook(@PathVariable("id") int id, @RequestBody Book book) {
+  public ResponseEntity<Void> updateBook(@PathVariable("id") int id, @RequestBody Book book) {
 
-    Book updatedBook;
     try {
-      updatedBook = this.restService.updateBook(id, book);
-      return ResponseEntity.status(HttpStatus.OK).body(updatedBook);
+      this.restService.updateBook(id, book);
+      return ResponseEntity.status(HttpStatus.OK).build();
     } catch (Exception e) {
       System.out.println(e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
