@@ -1,11 +1,18 @@
 package com.springboot.restapi.restapi.entities;
 
-public class Book {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
+public class Book {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
   private String book_title;
   private String book_name;
-  private String book_author;  
+  private String book_author;
 
   public Book() {
   }
@@ -49,5 +56,4 @@ public class Book {
     return book_author;
   }
 
-  
 }
