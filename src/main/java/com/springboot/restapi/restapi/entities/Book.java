@@ -1,5 +1,7 @@
 package com.springboot.restapi.restapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ public class Book {
   private String book_title;
   private String book_name;
 
+  @JsonManagedReference
   @OneToOne(cascade = CascadeType.ALL)
   private Author author;
 
